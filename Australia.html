@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU"
+      crossorigin="anonymous"
+    />
+
+    <title>Clock</title>
+
+    <style>
+      body{
+        /* background-color: rgb(128, 70, 70); */
+        background-image:url("brown.jpg");
+      }
+      /* .box {
+        margin: 55px 346px;
+        padding: 50px;
+        background-color: rgb(73, 44, 44);
+        width: 50%;
+        height: 410px;
+      } */
+      @keyframes ani{
+        from{
+          margin:100px 200px ;
+        }
+        to{
+          margin: 200px 270px ;
+        }
+      }
+    </style>
+  </head>
+  <body >
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">Clock</a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNavDarkDropdown"
+          aria-controls="navbarNavDarkDropdown"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavDarkDropdown">
+          <ul class="navbar-nav">
+            <li class="nav-item dropdown">
+              <a
+                class="nav-link dropdown-toggle"
+                href="#"
+                id="navbarDarkDropdownMenuLink"
+                role="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                Select the country
+              </a>
+              <ul
+                class="dropdown-menu dropdown-menu-dark"
+                aria-labelledby="navbarDarkDropdownMenuLink"
+              >
+               
+                <a class="dropdown-item" href="Argentina.html">Argentina</a>
+               
+                <li>
+                  <a class="dropdown-item" href="China.html">China</a>
+                  <a class="dropdown-item" href="Canada..html">Canada</a>
+                  <a class="dropdown-item" href="Indonesia.html">Indonesia</a>
+                  <a class="dropdown-item" href="Project_clock.html">India</a>
+                  <a class="dropdown-item" href="Russia.html">Russia</a>
+                  <a class="dropdown-item" href="Singapore.html">Singapore</a>
+                  <a class="dropdown-item" href="United States.html">United States</a>
+                  <a class="dropdown-item" href="United Kingdom.html">United Kingdom</a>
+
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <!-- <div class="box"> -->
+      
+      <table> <tr> <div style="width:300px;height:0;padding:90px;position:relative; align-items: center;margin: 0 470px; "><iframe src="https://giphy.com/embed/ORPubLtAJdJjAuvEx0" width="100%" height="250px" style="position:absolute" frameBorder="0" class="giphy-embed" allowFullScreen></iframe></div> <caption style="height: 100px;"></tr><tr >   <h2  style="background-color: rgb(78, 65, 65); text-align: center; padding: 20px; margin: 200px; color: aliceblue;animation-name: ani; animation-duration:4s;">Current Time in Australia is <span  id="idd">wait</span></h2></caption></tr></table>
+      
+
+      <!-- <h4>Current Time in india is <span class="badge bg-secondary" id="idd">wait</span></h4> -->
+      
+    <!-- </div> -->
+    <script>
+      let a;
+      let time=0;
+      let date;
+      let options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+      setInterval(() => {
+        time=0;
+        a = new Date();
+        let ch=a.getHours() ;
+        let ch2=ch+4;
+        let cm=a.getMinutes();
+        let cm2=cm+30;
+
+        if(ch2>24&&cm2<60){
+          let diffh=ch2-24;
+          time = diffh + ":" + cm2 + ":" + a.getSeconds();
+        date = a.toLocaleDateString(undefined,options);
+        document.getElementById('idd').innerHTML=time+" AM"+' </br>On '+date;
+
+        }
+        else if(ch2>=24&&cm2>=60)
+        {
+          let diffm=cm2-60;
+          let diffh2=(ch2-24)+1;
+          time = diffh2 + ":" + diffm+ ":" + a.getSeconds();
+          date = a.toLocaleDateString(undefined,options);
+         
+        document.getElementById('idd').innerHTML=time+" AM"+' </br>On '+date;
+        }
+        else if(ch2>=12&&cm2>60)
+        {
+          let diffm2=cm2-60;
+          let diffh3=ch2-12+1;
+          time = diffh3 + ":" + diffm2+ ":" + a.getSeconds();
+          date = a.toLocaleDateString(undefined,options);
+         
+        document.getElementById('idd').innerHTML=time+" pm"+' </br>On '+date;
+        }
+        else if(ch2>=12&&cm2<60)
+        {
+          let diffh3=ch2-12;
+          time = diffh3 + ":" + cm2+ ":" + a.getSeconds();
+          date = a.toLocaleDateString(undefined,options);
+         
+        document.getElementById('idd').innerHTML=time+" pm"+' </br>On '+date;
+        }
+        else if(ch2<12&&cm2>60)
+        {
+            let diffm2=cm2-60;
+          let diffh3=ch2+1;
+          
+          time = diffh3 + ":" + diffm2+ ":" + a.getSeconds();
+          date = a.toLocaleDateString(undefined,options);
+         
+        document.getElementById('idd').innerHTML="</br>"+time+" AM"+' On '+date;
+        }
+        else {
+          time = ch2 + ":" + cm2 + ":" + a.getSeconds();
+        date = a.toLocaleDateString(undefined,options);
+        document.getElementById('idd').innerHTML=time+" AM"+' </br>On '+date;
+        }
+       
+        // console.log(time + "on" + date);
+      }, 1000);
+    </script>
+    <!-- Optional JavaScript; choose one of the two! -->
+
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>
